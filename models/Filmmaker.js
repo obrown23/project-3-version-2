@@ -2,7 +2,7 @@ const mongoose = require('../db/connection.js')
 const Schema = mongoose.Schema
 
 const Filmmaker = new Schema({
-    name: String,
+    film_name: String,
     description: String,
     website: String,
     questions: String,
