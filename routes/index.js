@@ -1,12 +1,21 @@
-// const express = require('express')
-// const router = express.Router()
+const express = require('express')
+const router = express.Router()
 
-// const creatureController = require('../controllers/creatureController')
+const filmmakerController = require('../controllers/filmmakerController')
+const investorController = require('../controllers/investorController')
 
-// router.get('/', creatureController.index)
-// router.post('/', creatureController.create)
-// router.get('/:id', creatureController.show)
-// router.put('/:id', creatureController.update)
-// router.delete('/:id', creatureController.delete)
+router.get('/', filmmakerController.index)
+router.post('/', filmmakerController.create)
+router.get('/:id', filmmakerController.show)
+router.put('/:id', filmmakerController.update)
+router.delete('/:id', filmmakerController.delete)
 
-// module.exports = router
+router.get('/',investorController.index)
+router.post('/',investorController.create)
+router.get('/:id',investorController.show)
+router.put('/:id',investorController.update)
+router.delete('/:id',investorController.delete)
+
+
+
+module.exports = router
