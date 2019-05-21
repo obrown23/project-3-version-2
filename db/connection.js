@@ -1,15 +1,21 @@
 require('dotenv').config()
-  const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-  mongoose.connect(process.env.MONGODB_URI)
+if (process.env.MONGODB_URI) {
+   mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true})
 
-  mongoose.connection.once('open', () => {
-    console.log(`Mongoose has connected to MongoDB`)
-  })
+}
+else{
+   mongoose.connect('mongodb://localhost/Apartmentfinder', {useNewUrlParser: true})
+}
 
-  mongoose.connection.on('error', (error) => {
-    console.error(`MongoDB connection error!!! ${error}`)
-    process.exit(-1)
-  })
+mongoose.connection.once('open', () => {
+   console.log(`Mongoose has connected to MongoDB`)
+})
 
-  module.exports = mongoose
+mongoose.connection.on('error', (error) => {
+   console.error(`MongoDB connection error!!! ${error}`)
+   process.exit(-1)
+})
+
+module.exports = mongoose

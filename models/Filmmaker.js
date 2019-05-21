@@ -8,7 +8,7 @@ const Filmmaker = new Schema({
     questions: String,
     comments: String,
     email: String,
-    goal: String,
+    goal: String
 })
 
 module.exports = mongoose.model('Filmmaker', Filmmaker)
