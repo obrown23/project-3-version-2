@@ -12,11 +12,11 @@ router.put('/:id', filmmakerController.update)
 router.delete('/:id', filmmakerController.delete)
 
 // investor controller routes
-router.get('/',investorController.index)
-router.post('/',investorController.create)
-router.get('/:id',investorController.show)
-router.put('/:id',investorController.update)
-router.delete('/:id',investorController.delete)
+router.get('/investor/',investorController.index)
+router.post('/investor/',investorController.create)
+router.get('/investor/:investorId',investorController.show)
+router.put('/investor/:investorId',investorController.update)
+router.delete('/investor/:investorId',investorController.delete)
 
 
 

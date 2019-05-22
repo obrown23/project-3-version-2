@@ -1,56 +1,42 @@
 const Investor = require('../models/Investor.js')
 
 const investorController = {
-    index: async (req, res) => {
-        try {
-            const investors = await Investor.find({})
-            res.json(investors)
-        } catch (err) {
-            console.log(err)
-        }
+    index: function(req, res){
+        Investor.find().then(investor => {
+            res.send( {investor})
+        })
     },
-    show: async (req, res) => {
-        try {
-            const investorId = req.params.id
-            const investor = await Investor.findById(investorId)
-            res.json(investor)
-        } catch (err) {
-            console.log(err)
-            res.json(err)
-        }
+    
+    
+    new: function(req, res){
+        res.send("/investors/")
     },
-    create: async (req, res) => {
-        try {
-          const newInvestor = req.body
-          const savedInvestor = await Investor.create(newInvestor)
-          res.json(savedInvestor)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
-        }
+    
+    show: function(req,res){
+        investorModel.findById(req.params.investorId).then(investor => {
+            res.send("/investor/:investorId")
+        })
     },
-    update: async (req, res) => {
-        try {
-          const investorId = req.params.id
-          const updatedInvestor = req.body
-          const savedInvestor = await Creature.findByIdAndUpdate(investorId, updatedInvestor, {new: true})
-          res.json(savedInvestor)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
-        }
+    
+    create: function(req,res) {
+        newinvestor = (req.body)
+        investorModel.create(newinvestor).then(() => res.redirect("/investor/"))
     },
-    delete: async (req, res) => {
-        console.log('DELETE')
-        try {
-          const investorId = req.params.id
-          const deletedInvestor = await Investor.findByIdAndRemove(investorId)
-          res.json(deletedInvestor)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
+    
+    update: function(req,res){
+        investorModel.findByIdAndUpdate(req.params.investorId, req.body).then(() => {
+            res.redirect("/investor/:investorId")
+        })
+    },
+    
+    delete: function(req,res){
+        investorModel.findByIdAndRemove(req.params.investorId).then(() => {
+            res.redirect("/investor/:investorId")
+            })
         }
     }
-}
+    
+    module.exports = investorController
+    
 
-module.exports = investorController
+

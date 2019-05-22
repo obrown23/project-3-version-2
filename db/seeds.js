@@ -13,12 +13,12 @@ const Investor = require('../models/Investor.js')
 
   saved()
 // Investor Seed
-  const saved = async () => {
-    await Investor.deleteMany()
-    const paulC = new Investor({name: 'Paul Chapman', occupation: 'Senior Web Developer'})
-    await paulC.save()
-    const babayemi = new Investor({name: 'Babayemi Oluwayemi', occpation: 'Brain Surgent'})
-    await babayemi.save()
-  }
+//   const saved = async () => {
+//     await Investor.deleteMany()
+//     const paulC = new Investor({name: 'Paul Chapman', occupation: 'Senior Web Developer'})
+//     await paulC.save()
+//     const babayemi = new Investor({name: 'Babayemi Oluwayemi', occpation: 'Brain Surgent'})
+//     await babayemi.save()
+//   }
 
-  saved()
+//   saved()

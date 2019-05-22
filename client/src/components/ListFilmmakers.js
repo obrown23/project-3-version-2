@@ -6,6 +6,19 @@ import axios from 'axios'
 
 // export default 
 class FilmmakersList extends Component {
+  state = {
+    filmmakers: [],
+    newFilmmaker: {
+        name: '',
+        description: '',
+        website:'',
+        questions:'',
+        comments: '',
+        email: '',
+        goal: '',
+    }
+    
+}
   render(){
     return(
       <div>
@@ -15,19 +28,7 @@ class FilmmakersList extends Component {
       </div>
     )
   }
-  state = {
-      filmmakers: [],
-      newFilmmaker: {
-          name: '',
-          description: '',
-          website:'',
-          questions:'',
-          comments: '',
-          email: '',
-          goal: '',
-      }
-      
-  }
+
 
   
 }

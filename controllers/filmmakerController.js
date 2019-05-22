@@ -1,56 +1,51 @@
 const Filmmaker = require('../models/Filmmaker.js')
 
 const filmmakerController = {
-    index: async (req, res) => {
-        try {
-            const filmmakers = await Filmmaker.find({})
-            res.json(filmmakers)
-        } catch (err) {
-            console.log(err)
-        }
+    index: function(req, res){
+        Filmmaker.find().then(filmmaker => {
+            res.send( {filmmaker})
+        })
     },
-    show: async (req, res) => {
-        try {
-            const filmmakerId = req.params.id
-            const filmmaker = await Filmmaker.findById(filmmakerId)
-            res.json(filmmaker)
-        } catch (err) {
-            console.log(err)
-            res.json(err)
-        }
+
+    
+    new: function(req, res){
+        res.send("filmmakers/")
     },
-    create: async (req, res) => {
-        try {
-          const newFilmmaker = req.body
-          const savedFilmmaker = await Filmmaker.create(newFilmmaker)
-          res.json(savedFilmmaker)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
-        }
+    
+    show: function(req,res){
+        filmmakerModel.findById(req.params.filmmakerId).then(filmmaker => {
+            res.send({filmmaker})
+        })
     },
-    update: async (req, res) => {
-        try {
-          const filmmakerId = req.params.id
-          const updatedFilmmaker = req.body
-          const savedFilmmaker = await Filmmaker.findByIdAndUpdate(filmmakerId, updatedFilmmaker, {new: true})
-          res.json(savedFilmmaker)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
-        }
+   
+    create: function(req,res) {
+        newfilmmaker = (req.body)
+        filmmakerModel.create(newfilmmaker).then(() => res.redirect("/"))
     },
-    delete: async (req, res) => {
-        console.log('DELETE')
-        try {
-          const filmmakerId = req.params.id
-          const deletedFilmmaker = await Filmmaker.findByIdAndRemove(filmmakerId)
-          res.json(deletedFilmmaker)
-        } catch (err) {
-          console.log(err)
-          res.status(500).json(err)
+    
+    update: function(req,res){
+        filmmakerModel.findByIdAndUpdate(req.params.filmmakerId, req.body).then(() => {
+            res.redirect("/")
+        })
+    },
+    
+    delete: function(req,res){
+        filmmakerModel.findByIdAndRemove(req.params.filmmakerId).then(() => {
+            res.redirect("/")
+            })
         }
     }
-}
 
 module.exports = filmmakerController
+
+
+
+
+// const filmmakerModel = require('../models/filmmakers.js')
+
+
+
+
+
+    
+
