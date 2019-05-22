@@ -22,7 +22,7 @@ router.delete('/investor/:investorId',investorController.delete)
 
 
 
-// module.exports = router
+module.exports = router
 
 
 // class Allbooks extends Component {
