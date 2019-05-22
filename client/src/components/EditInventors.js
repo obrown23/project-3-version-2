@@ -27,7 +27,7 @@ class EditInventors extends Component {
         })
     }
 
-    deleteFilm = () => {
+    deleteInventor = () => {
         axios.delete(`/api/filmmaker/${this.props.match.params.id}`).then(res => {
             this.setState({ redirectToHome: true })
         })
