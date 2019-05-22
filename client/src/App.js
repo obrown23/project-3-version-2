@@ -12,6 +12,8 @@ class App extends Component {
     <div className="container">
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <Link to="/" className="navbar-name">Filmmakers</Link>
+    <Link to="/edit/:id" className="navbar-name">Edit Film Bio</Link>
+    <Link to="/create" className="navbar-name">Create Film Bio</Link>
     <div className="collapse nav-collapse">
     <ul className="navbar-nav mr-auto">
     <li className="navbar-item">
