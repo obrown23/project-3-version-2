@@ -10,4 +10,9 @@ const Investor = new Schema({
     goal: String,
 })
 
-module.exports = mongoose.model('Investor', Investor)
+let InvestorCollection = mongoose.model('Investor', Investor);
+module.exports = InvestorCollection
+
+
+
+
