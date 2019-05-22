@@ -83,50 +83,50 @@ class CreateInventors extends Component {
                 }
                 <button onClick={this.toggleInventorForm}>+ New Inventor</button>
                 {
-                    this.state.isFilmmakerFormDisplayed
+                    this.state.isInventorFormDisplayed
                         ? <form onSubmit={this.onSubmit}>
 
                             <div className="formInfo">
                                 <label>Name:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_name}
-                                    onChange={this.onChangeFilmmakerName} />
+                                    value={this.state.inventor_name}
+                                    onChange={this.onChangeInventorName} />
                             </div>
                             <div className="formInfo">
                                 <label>Description:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_description}
-                                    onChange={this.onChangeFilmmakerDescription} />
+                                    value={this.state.inventor_description}
+                                    onChange={this.onChangeInventorDescription} />
                             </div>
                             <div className="formInfo">
                                 <label>Website:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_website}
-                                    onChange={this.onChangeFilmmakerWebsite} />
+                                    value={this.state.inventor_website}
+                                    onChange={this.onChangeInventorWebsite} />
                             </div>
                             <div className="formInfo">
                                 <label>Questions:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_questions}
-                                    onChange={this.onChangeFilmmakerQuestions} />
+                                    value={this.state.inventor_questions}
+                                    onChange={this.onChangeInventorQuestions} />
                             </div>
                             <div className="formInfo">
                                 <label>Comments:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_comments}
-                                    onChange={this.onChangeFilmmakerComments} />
+                                    value={this.state.inventor_comments}
+                                    onChange={this.onChangeInventorComments} />
                             </div>
                             <div className="formInfo">
                                 <label>Email:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_email}
-                                    onChange={this.onChangeFilmmakerEmail} />
+                                    value={this.state.inventor_email}
+                                    onChange={this.onChangeInventorEmail} />
                             </div>
 
                             <label htmlFor="name">Phone</label>
@@ -145,8 +145,8 @@ class CreateInventors extends Component {
                                 <label>Goal:</label>
                                 <input type='text'
                                     className="formOption"
-                                    value={this.state.filmmaker_goal}
-                                    onChange={this.onChangeFilmmakerGoal} />
+                                    value={this.state.inventor_goal}
+                                    onChange={this.onChangeInventorGoal} />
                             </div>
 
                             <button>Create</button>
@@ -157,4 +157,4 @@ class CreateInventors extends Component {
         )
     }
 }
-export default CreateFilmmakers
+export default CreateInventors
