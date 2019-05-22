@@ -22,8 +22,8 @@ class EditInventors extends Component {
     }
 
     componentDidMount = () => {
-        axios.get(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
-            this.setState({ filmmaker: res.data })
+        axios.get(`/api/inventors/${this.props.match.params.id}`).then(res => {
+            this.setState({ inventor: res.data })
         })
     }
 
