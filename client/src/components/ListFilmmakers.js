@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 
 
@@ -39,7 +40,7 @@ class SingleCreature extends Component {
           name: '',
           description: ''
       },
-      redirectToHome: false,
+      // redirectToHome: false,
       isEditFormDisplayed: false
   }
 
@@ -80,9 +81,9 @@ class SingleCreature extends Component {
   }
 
   render() {
-    if(this.state.redirectToHome) {
-        return (<Redirect to="/" />)
-    }
+    // if(this.state.redirectToHome) {
+    //     // return (<Redirect to="/" />)
+    // }
 
     return (
       <div>
