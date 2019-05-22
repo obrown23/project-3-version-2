@@ -31,7 +31,7 @@ class FilmmakersList extends Component {
   
 }
 
-export default 
+
 
 class SingleCreature extends Component {
   state = {
