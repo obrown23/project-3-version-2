@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 
 // export default 
-class extends Component {
+class FilmmakersList extends Component {
   render(){
     return(
       <div>
