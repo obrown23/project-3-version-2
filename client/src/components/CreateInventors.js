@@ -45,19 +45,20 @@ class CreateInventors extends Component {
                 description: this.state.newInventor.description
             })
             .then(res => {
-                const filmmakersList = [...this.state.filmmakers]
-                filmmakersList.unshift(res.data)
+                const inventorsList = [...this.state.inventors]
+                inventorsList.unshift(res.data)
                 this.setState({
-                    newFilmmaker: {
+                    newInventor: {
                         name: '',
+                        description: '',
                         website: '',
                         questions: '',
                         comments: '',
                         email: '',
                         goal: ''
                     },
-                    isFilmmakerFormDisplayed: false,
-                    filmmakers: filmmakersList
+                    isInventorFormDisplayed: false,
+                    inventors: inventorsList
                 })
             })
 
@@ -66,21 +67,21 @@ class CreateInventors extends Component {
     render() {
         return (
             <div>
-                <h1>Films</h1>
+                <h1>Inventors</h1>
                 {
-                    this.state.filmmakers.map(filmmaker => {
+                    this.state.inventors.map(inventor => {
                         return (
-                            <div key={filmmaker._id}>
+                            <div key={inventor._id}>
                                 <Link
-                                    to={`/filmmakers/${filmmaker._id}`}
+                                    to={`/inventors/${inventor._id}`}
                                 >
-                                    {filmmaker.name}
+                                    {inventor.name}
                                 </Link>
                             </div>
                         )
                     })
                 }
-                <button onClick={this.toggleFilmmakerForm}>+ New Film</button>
+                <button onClick={this.toggleInventorForm}>+ New Inventor</button>
                 {
                     this.state.isFilmmakerFormDisplayed
                         ? <form onSubmit={this.onSubmit}>
