@@ -11,7 +11,7 @@ class App extends Component {
     <Router>
     <div className="container">
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <Link to="/" className="navbar-name">Project Reel Exposure App</Link>
+    <Link to="/" className="navbar-name">Filmmakers</Link>
     <div className="collapse nav-collapse">
     <ul className="navbar-nav mr-auto">
     <li className="navbar-item">
@@ -23,7 +23,7 @@ class App extends Component {
     </ul>
     </div>
     </nav>
-      <h1>Project Reel Exposure</h1>
+      <h1>Project Reel Exposure App</h1>
       <Route path="/" exact component={FilmmakersList} />
     <Route path="/edit/:id" component={EditFilmmakers} />
     <Route path="/create" component={CreateFilmmakers} />
