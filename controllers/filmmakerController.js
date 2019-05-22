@@ -2,35 +2,35 @@ const Filmmaker = require('../models/Filmmaker.js')
 
 const filmmakerController = {
     index: function(req, res){
-        Filmmaker.find().then(filmmaker => {
-            res.send( {filmmaker})
+        Filmmaker.find().then(filmmakers => {
+            res.send( {filmmakers})
         })
     },
 
     
     new: function(req, res){
-        res.send("filmmakers/")
+        res.send()
     },
     
     show: function(req,res){
-        filmmakerModel.findById(req.params.filmmakerId).then(filmmaker => {
+        Filmmaker.findById(req.params.id).then(filmmaker => {
             res.send({filmmaker})
         })
     },
    
     create: function(req,res) {
         newfilmmaker = (req.body)
-        filmmakerModel.create(newfilmmaker).then(() => res.redirect("/"))
+        Filmmaker.create(newfilmmaker).then(() => res.redirect("/"))
     },
     
     update: function(req,res){
-        filmmakerModel.findByIdAndUpdate(req.params.filmmakerId, req.body).then(() => {
+        Filmmaker.findByIdAndUpdate(req.params.id, req.body).then(() => {
             res.redirect("/")
         })
     },
     
     delete: function(req,res){
-        filmmakerModel.findByIdAndRemove(req.params.filmmakerId).then(() => {
+        Filmmaker.findByIdAndRemove(req.params.id).then(() => {
             res.redirect("/")
             })
         }
