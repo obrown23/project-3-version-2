@@ -27,22 +27,22 @@ class CreateInventors extends Component {
 
     toggleInventorForm = () => {
         this.setState((state, props) => {
-            return ({ isFilmmakerFormDisplayed: !state.isFilmmakerFormDisplayed })
+            return ({ isInventorFormDisplayed: !state.isInventorFormDisplayed })
         })
     }
     handleChange = (e) => {
-        const cloneNewFilmmaker = { ...this.state.newFilmmaker }
-        cloneNewFilmmaker[e.target.name] = e.target.value
-        this.setState({ newFilmmaker: cloneNewFilmmaker }, () => { console.log(this.state.newFilmmaker) })
+        const cloneNewInventor = { ...this.state.newInventor }
+        cloneNewInventor[e.target.name] = e.target.value
+        this.setState({ newInventor: cloneNewInventor }, () => { console.log(this.state.newInventor) })
     }
 
-    createFilmmaker = (e) => {
+    createInventor = (e) => {
         e.preventDefault()
-        console.log(this.state.newFilmmaker.name)
+        console.log(this.state.newInventor.name)
         axios
-            .post('/api/filmmakers', {
-                name: this.state.newFilmmaker.name,
-                description: this.state.newFilmmaker.description
+            .post('/api/inventors', {
+                name: this.state.newInventor.name,
+                description: this.state.newInventor.description
             })
             .then(res => {
                 const filmmakersList = [...this.state.filmmakers]
