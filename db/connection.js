@@ -6,7 +6,7 @@ if (process.env.MONGODB_URI) {
 
 }
 else{
-   mongoose.connect('mongodb://localhost/Apartmentfinder', {useNewUrlParser: true})
+   mongoose.connect('mongodb://localhost/Project-3-version-2', {useNewUrlParser: true})
 }
 
 mongoose.connection.once('open', () => {
