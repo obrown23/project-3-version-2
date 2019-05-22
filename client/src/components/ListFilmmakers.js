@@ -1,133 +1,159 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios'
 
 
 
-// export default 
 class FilmmakersList extends Component {
   state = {
-    filmmakers: [],
-    newFilmmaker: {
-        name: '',
-        description: '',
-        website:'',
-        questions:'',
-        comments: '',
-        email: '',
-        goal: '',
-    }
-    
-}
-  render(){
-    return(
-      <div>
-        <p>
-        Welcome to Filmmakers List
-        </p>
-      </div>
-    )
-  }
-
-
-  
-}
-
-
-
-class SingleCreature extends Component {
-  state = {
-      creature: {
-          name: '',
-          description: ''
+    filmmaker: {
+      name: '',
+      description: '',
+      website: '',
+      questions: '',
+      comments: '',
+      email: '',
+      goal: ''
       },
-      // redirectToHome: false,
+      redirectToHome: false,
       isEditFormDisplayed: false
   }
 
   componentDidMount = () => {
-      axios.get(`/api/v1/${this.props.match.params.id}`).then(res => {
-          this.setState({creature: res.data})
+      axios.get(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+          this.setState({ filmmaker: res.data })
       })
   }
 
-  deleteCreature = () => {
-      axios.delete(`/api/v1/${this.props.match.params.id}`).then(res => {
-          this.setState({redirectToHome: true})
+  deleteDoctor = () => {
+      axios.delete(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+          this.setState({ redirectToHome: true })
       })
   }
 
   toggleEditForm = () => {
       this.setState((state, props) => {
-          return {isEditFormDisplayed: !state.isEditFormDisplayed}
+          return { isEditFormDisplayed: !state.isEditFormDisplayed }
       })
   }
 
   handleChange = (e) => {
-      const cloneCreature = {...this.state.creature}
-      cloneCreature[e.target.name] = e.target.value
-      this.setState({creature: cloneCreature})
+      const cloneFilmmaker = { ...this.state.filmmaker }
+      cloneFilmmaker[e.target.name] = e.target.value
+      this.setState({ filmmaker: cloneFilmmaker })
   }
 
-  updateCreature = (e) => {
+  updateFilmmaker = (e) => {
       e.preventDefault()
+      console.log('submit clicked')
       axios
-        .put(`/api/v1/${this.props.match.params.id}`, {
-            name: this.state.creature.name,
-            description: this.state.creature.description
-        })
-        .then(res => {
-            this.setState({creature: res.data, isEditFormDisplayed: false})
-        })
+          .put(`/api/filmmakers/${this.props.match.params.id}`, {
+              name: this.state.filmmaker.name,
+              description: this.state.filmmaker.description,
+              website: this.state.filmmaker.website,
+              comments: this.state.filmmaker.comments,
+              email: this.state.filmmaker.email,
+              goal: this.state.filmmaker.goal,
+              
+          })
+          .then(res => {
+              this.setState({ filmmaker: res.data, isEditFormDisplayed: false })
+          })
   }
 
   render() {
-    // if(this.state.redirectToHome) {
-    //     // return (<Redirect to="/" />)
-    // }
-
-    return (
-      <div>
-        <Link to="/">Back to Creatures Home</Link>
-        <h1>Single Creature</h1>
-        <button onClick={this.toggleEditForm}>Edit</button>
-        {
-            this.state.isEditFormDisplayed
-                ? <form onSubmit={this.updateCreature}>
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            onChange={this.handleChange}
-                            value={this.state.creature.name}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            onChange={this.handleChange}
-                            value={this.state.creature.description}
-                        />
-                    </div>
-                    <button>Update</button>
-                </form>
-                : <div>
-                    <div>
-                        Name: {this.state.creature.name}
-                    </div>
-                    <div>
-                        Description: {this.state.creature.description}
-                    </div>
-                    <button onClick={this.deleteCreature}>Delete</button>
+      console.log(this.state)
+      if (this.state.redirectToHome) {
+          return (<Redirect to="/" />)
+      }
+      return (
+        <div>
+            <h1>Film</h1>
+            <div>
+                <div>
+                    Film Name: {this.state.filmmaker.name}
                 </div>
-        }
-      </div>
-    );
+                <div>
+                    Description: {this.state.filmmaker.description}
+                </div>
+                <div>
+                    Website: {this.state.filmmaker.website}
+                </div>
+                <div>
+                    Questions: {this.state.filmmaker.questions}
+                </div>
+                <div>
+                    Comments: {this.state.filmmaker.comments}
+                </div>
+                <div>
+                    Email: {this.state.filmmaker.email}
+                </div>
+                <div>
+                    Goal: {this.state.filmmaker.goal}
+                </div>
+                <button onClick={this.deletefilmmaker}>Delete</button>
+            </div>
+
+            <form onSubmit={this.updateFilmmaker}>
+
+                <div className="form-Command">
+                    <label htmlFor="name">Name</label>
+                    <input type="text"
+                        name="name"
+                        className="form-control"
+                        onChange={this.handleChange} />
+                </div>
+
+                <div className="form-Command">
+                    <label htmlFor="name">Description</label>
+                    <input type="text"
+                        name="description"
+                        className="form-counter"
+                        onChange={this.handleChange} />
+                </div>
+
+                <div className="form-Command">
+                    <label htmlFor="name">Website</label>
+                    <input type="text"
+                        className="form-counter"
+                        name="website"
+                        onChange={this.handleChange} />
+                </div>
+                <div className="form-Command">
+                    <label htmlFor="name">Questions</label>
+                    <input type="text"
+                        className="form-counter"
+                        name="questions"
+                        onChange={this.handleChange} />
+                </div>
+
+                <div className="form-Command">
+                    <label htmlFor="name">Comments</label>
+                    <input type="text"
+                        className="form-counter"
+                        name="comments"
+                        onChange={this.handleChange} />
+                </div>
+                <div className="form-Command">
+                    <label htmlFor="name">Email</label>
+                    <input type="text"
+                        className="form-counter"
+                        name="email"
+                        onChange={this.handleChange} />
+                </div>
+                <div className="form-Command">
+                    <label htmlFor="name">Goal</label>
+                    <input type="text"
+                        className="form-counter"
+                        name="goal"
+                        onChange={this.handleChange} />
+                </div>
+                <input type="submit" value="update filmmaker"/>
+            </form>
+        </div>
+      );
   }
 }
+
 
 export default FilmmakersList;
