@@ -25,11 +25,16 @@ class FilmmakersList extends Component {
       })
   }
 
-  deleteDoctor = () => {
-      axios.delete(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+  deleteFilmmaker = () => {
+      axios.delete(`/api/${this.props.match.params.id}`).then(res => {
           this.setState({ redirectToHome: true })
       })
   }
+  createFilmmaker = () => {
+    axios.post(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+        this.setState({ filmmaker: res.send })
+    })
+}
 
   toggleEditForm = () => {
       this.setState((state, props) => {
@@ -59,6 +64,20 @@ class FilmmakersList extends Component {
           .then(res => {
               this.setState({ filmmaker: res.data, isEditFormDisplayed: false })
           })
+
+  }
+  showFilms = () => {
+    return this.state.filmmakers.map((filmmaker, i) => (
+      <div key={i} filmmakers={filmmaker}>
+      <Link to={`${filmmaker._id}`}>
+      <div className='one'>
+      <h2>{filmmaker.name}</h2>
+      <h2>{filmmaker.description}</h2>
+      <h2>{filmmaker.website}</h2>
+      </div>
+      </Link>
+      </div>
+    ))
   }
 
   render() {
@@ -67,6 +86,23 @@ class FilmmakersList extends Component {
           return (<Redirect to="/" />)
       }
       return (
+        <div className="filmcontainer">
+        {this.showFilms()}
+        </div>
+        <button className="buttons createbutton" onClick={this.toggleEditForm}>Add New filmmaker</button>
+        {this.state.isEditFormDisplayed
+                ? 
+                <form onSubmit={this.createBook}>
+                    <div>
+                        <label htmlFor="name">Name</label>
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            onChange={this.handleChange}
+                            value={this.state.newBook.name}
+                        />
+                    </div>
         <div>
             <h1>Film</h1>
             <div>
@@ -151,7 +187,9 @@ class FilmmakersList extends Component {
                 <input type="submit" value="update filmmaker"/>
             </form>
         </div>
-      );
+        :null }
+        )
+        
   }
 }
 

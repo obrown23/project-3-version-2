@@ -1,17 +1,34 @@
 const Filmmaker = require('../models/Filmmaker.js')
 const Investor = require('../models/Investor.js')
-  // using async/await
+// using async/await
 //   Gran torino description taken from https://www.imdb.com/title/tt1205489/
 // Gundam description https://en.wikipedia.org/wiki/Mobile_Suit_Gundam
-  const saved = async () => {
+const saved = async () => {
     await Filmmaker.deleteMany()
-    const granTorino = new Filmmaker({film_name: 'Gran-Torino', description: 'Disgruntled Korean War veteran Walt Kowalski sets out to reform his neighbor, a Hmong teenager who tried to steal Kowalskis prized possession a 1972 Gran Torino'})
+    const granTorino = new Filmmaker({
+        film_name: 'Gran-Torino',
+        description: 'Disgruntled Korean War veteran Walt Kowalski sets out to reform his neighbor, a Hmong teenager who tried to steal Kowalskis prized possession a 1972 Gran Torino',
+        website: '',
+        questions: '',
+        comments: '',
+        email:'',
+        goal: ''
+    })
     await granTorino.save()
-    const gundam = new Filmmaker({film_name: 'Gundam', description: 'Set in a fictional universe in the year 2179 the Principality of Zeon has declared independence from the Earth Federation, and subsequently launched a war of independence called the One Year War'})
+    
+    const gundam = new Filmmaker({
+        film_name: 'Gundam',
+        description: 'Set in a fictional universe in the year 2179 the Principality of Zeon has declared independence from the Earth Federation, and subsequently launched a war of independence called the One Year War',
+        website: '',
+        questions: '',
+        comments: '',
+        email:'',
+        goal: ''
+    })
     await gundam.save()
-  }
+}
 
-  saved()
+saved()
 // Investor Seed
 //   const saved = async () => {
 //     await Investor.deleteMany()
