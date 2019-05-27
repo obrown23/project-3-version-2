@@ -110,7 +110,7 @@ class FilmmakersList extends Component {
                     <div>
                         Goal: {this.state.filmmaker.goal}
                     </div>
-                    <button onClick={this.deletefilmmaker}>Delete</button>
+                    <button onClick={this.deleteFilmmaker}>Delete</button>
                 </div>
 
 

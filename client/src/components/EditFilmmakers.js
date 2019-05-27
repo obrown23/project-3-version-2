@@ -8,7 +8,8 @@ import axios from "axios";
 // export default 
 class EditFilmmakers extends Component {
     state = {
-        filmmaker: {
+        filmmakers: [],
+        newFilmmaker: {
             name: '',
             description: '',
             website: '',
@@ -17,19 +18,12 @@ class EditFilmmakers extends Component {
             email: '',
             goal: ''
         },
-        redirectToHome: false,
         isEditFormDisplayed: false
     }
 
     componentDidMount = () => {
-        axios.get(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+        axios.get(`/api/${this.props.match.params.id}`).then(res => {
             this.setState({ filmmaker: res.data })
-        })
-    }
-
-    deleteFilm = () => {
-        axios.delete(`/api/filmmaker/${this.props.match.params.id}`).then(res => {
-            this.setState({ redirectToHome: true })
         })
     }
 
@@ -40,116 +34,126 @@ class EditFilmmakers extends Component {
     }
 
     handleChange = (e) => {
-        const cloneFilmmaker = { ...this.state.filmmaker }
-        cloneFilmmaker[e.target.name] = e.target.value
-        this.setState({ filmmaker: cloneFilmmaker })
+        const cloneNewFilmmaker = { ...this.state.newFilmmaker }
+        cloneNewFilmmaker[e.target.name] = e.target.value
+        this.setState({ newFilmmaker: cloneNewFilmmaker })
     }
 
-    updateFilmmaker = (e) => {
+    createFilmmaker = (e) => {
         e.preventDefault()
-        console.log('submit clicked')
+        console.log(this.state.newFilmmaker.name)
         axios
-            .put(`/api/filmmakers/${this.props.match.params.id}`, {
-                name: this.state.filmmaker.name,
-                description: this.state.filmmaker.description
+            .post(`/api/${this.props.match.params.id}`, {
+                name: this.state.newFilmmaker.name,
+                description: this.state.newFilmmaker.description,
+                website: this.state.newFilmmaker.website,
+                questions: this.state.newFilmmaker.questions,
+                comments: this.state.newFilmmaker.comments,
+                email: this.state.newFilmmaker.email,
+                goal: this.state.newFilmmaker.goal,
             })
             .then(res => {
-                this.setState({ filmmaker: res.data, isEditFormDisplayed: false })
+                const editFilmmakersList = [...this.state.filmmakers]
+                editFilmmakersList.unshift(res.data)
+                this.setState({
+                    newFilmmaker: {
+                        name: '',
+                        description: '',
+                        website: '',
+                        questions: '',
+                        comments: '',
+                        email: '',
+                        goal: ''
+                    },
+                    isEditFormDisplayed: false,
+                    filmmakers: editFilmmakersList
+
+                })
             })
     }
 
     render() {
-        console.log(this.state)
-        if (this.state.redirectToHome) {
-            return (<Redirect to="/" />)
-        }
-
         return (
             <div>
-                <h1>Film</h1>
-                <div>
-                    <div>
-                        Film Name: {this.state.filmmaker.name}
-                    </div>
-                    <div>
-                        Description: {this.state.filmmaker.description}
-                    </div>
-                    <div>
-                        Website: {this.state.filmmaker.website}
-                    </div>
-                    <div>
-                        Questions: {this.state.filmmaker.questions}
-                    </div>
-                    <div>
-                        Comments: {this.state.filmmaker.comments}
-                    </div>
-                    <div>
-                        Email: {this.state.filmmaker.email}
-                    </div>
-                    <div>
-                        Goal: {this.state.filmmaker.goal}
-                    </div>
-                    <button onClick={this.deletefilmmaker}>Delete</button>
-                </div>
+                <h1>Filmmakers</h1>
+                {
+                    this.state.filmmakers.map(filmmaker => {
+                        return (
+                            <div key={filmmaker._id}>
+                                <Link
+                                    to={`/${filmmaker._id}`}
+                                >
+                                    {filmmaker.name}
+                                </Link>
+                            </div>
+                        )
+                    })
+                }
+                <button onClick={this.toggleFilmmakerForm}> New Filmmaker</button>
+                {
+                    this.state.isEditFormDisplayed
 
-                <form onSubmit={this.updateFilmmaker}>
+                        ? <form onSubmit={this.updateFilmmaker}>
 
-                    <div className="form-Command">
-                        <label htmlFor="name">Name</label>
-                        <input type="text"
-                            name="name"
-                            className="form-control"
-                            onChange={this.handleChange} />
-                    </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Name</label>
+                                <input type="text"
+                                    name="name"
+                                    className="form-control"
+                                    onChange={this.handleChange} />
+                            </div>
 
-                    <div className="form-Command">
-                        <label htmlFor="name">Description</label>
-                        <input type="text"
-                            name="description"
-                            className="form-counter"
-                            onChange={this.handleChange} />
-                    </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Description</label>
+                                <input type="text"
+                                    name="description"
+                                    className="form-counter"
+                                    onChange={this.handleChange} />
+                            </div>
 
-                    <div className="form-Command">
-                        <label htmlFor="name">Website</label>
-                        <input type="text"
-                            className="form-counter"
-                            name="website"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-Command">
-                        <label htmlFor="name">Questions</label>
-                        <input type="text"
-                            className="form-counter"
-                            name="questions"
-                            onChange={this.handleChange} />
-                    </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Website</label>
+                                <input type="text"
+                                    className="form-counter"
+                                    name="website"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Questions</label>
+                                <input type="text"
+                                    className="form-counter"
+                                    name="questions"
+                                    onChange={this.handleChange} />
+                            </div>
 
-                    <div className="form-Command">
-                        <label htmlFor="name">Comments</label>
-                        <input type="text"
-                            className="form-counter"
-                            name="comments"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-Command">
-                        <label htmlFor="name">Email</label>
-                        <input type="text"
-                            className="form-counter"
-                            name="email"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-Command">
-                        <label htmlFor="name">Goal</label>
-                        <input type="text"
-                            className="form-counter"
-                            name="goal"
-                            onChange={this.handleChange} />
-                    </div>
-                    <input type="submit" value="update filmmaker"/>
-                </form>
+                            <div className="form-Command">
+                                <label htmlFor="name">Comments</label>
+                                <input type="text"
+                                    className="form-counter"
+                                    name="comments"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Email</label>
+                                <input type="text"
+                                    className="form-counter"
+                                    name="email"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <div className="form-Command">
+                                <label htmlFor="name">Goal</label>
+                                <input type="text"
+                                    className="form-counter"
+                                    name="goal"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <button>Create</button>
+                        </form>
+                        : null
+
+                }
             </div>
-        );
+        )
     }
 }
 
