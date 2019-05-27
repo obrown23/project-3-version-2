@@ -89,7 +89,7 @@ class EditFilmmakers extends Component {
                         )
                     })
                 }
-                <button onClick={this.toggleFilmmakerForm}> New Filmmaker</button>
+                <button onClick={this.toggleEditForm}> New Filmmaker</button>
                 {
                     this.state.isEditFormDisplayed
 
