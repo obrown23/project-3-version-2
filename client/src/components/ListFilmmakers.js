@@ -20,7 +20,7 @@ class FilmmakersList extends Component {
     }
 
     componentDidMount = () => {
-        axios.get(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
+        axios.get(`/api/${this.props.match.params.id}`).then(res => {
             this.setState({ filmmaker: res.data })
         })
     }
@@ -30,11 +30,7 @@ class FilmmakersList extends Component {
             this.setState({ redirectToHome: true })
         })
     }
-    createFilmmaker = () => {
-        axios.post(`/api/filmmakers/${this.props.match.params.id}`).then(res => {
-            this.setState({ filmmaker: res.send })
-        })
-    }
+
 
     toggleEditForm = () => {
         this.setState((state, props) => {
@@ -52,7 +48,7 @@ class FilmmakersList extends Component {
         e.preventDefault()
         console.log('submit clicked')
         axios
-            .put(`/api/filmmakers/${this.props.match.params.id}`, {
+            .put(`/api/${this.props.match.params.id}`, {
                 name: this.state.filmmaker.name,
                 description: this.state.filmmaker.description,
                 website: this.state.filmmaker.website,
@@ -66,19 +62,19 @@ class FilmmakersList extends Component {
             })
 
     }
-    showFilms = () => {
-        return this.state.filmmakers.map((filmmaker, i) => (
-            <div key={i} filmmakers={filmmaker}>
-                <Link to={`${filmmaker._id}`}>
-                    <div className='one'>
-                        <h2>{filmmaker.name}</h2>
-                        <h2>{filmmaker.description}</h2>
-                        <h2>{filmmaker.website}</h2>
-                    </div>
-                </Link>
-            </div>
-        ))
-    }
+    // showFilms = () => {
+    //     return this.state.filmmakers.map((filmmaker, i) => (
+    //         <div key={i} filmmakers={filmmaker}>
+    //             <Link to={`${filmmaker._id}`}>
+    //                 <div className='one'>
+    //                     <h2>{filmmaker.name}</h2>
+    //                     <h2>{filmmaker.description}</h2>
+    //                     <h2>{filmmaker.website}</h2>
+    //                 </div>
+    //             </Link>
+    //         </div>
+    //     ))
+    // }
 
     render() {
         console.log(this.state)

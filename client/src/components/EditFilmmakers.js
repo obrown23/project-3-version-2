@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 
@@ -23,7 +23,7 @@ class EditFilmmakers extends Component {
 
     componentDidMount = () => {
         axios.get(`/api/${this.props.match.params.id}`).then(res => {
-            this.setState({ filmmaker: res.data })
+            this.setState({ filmmakers: res.data })
         })
     }
 
